@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Used Car Price Estimator & AI Buying Advisory · Deep Learning</title>
+  <meta name="description" content="AI Used Car Valuation, Buying Advisory, Visual Photo Inspection & 360° Pre-Purchase Checklist for India.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e5a58'/%3E%3Cpath d='M6 21a10 10 0 0 1 20 0' fill='none' stroke='%23f6c324' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M16 21l5-7' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preload" href="{{ url_for('static', filename='fonts/archivo-latin-wdth-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="#estimate" aria-label="Used Car Price Estimator">
+        <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="var(--petrol)"/>
+          <path d="M8 27a12 12 0 0 1 24 0" fill="none" stroke="var(--plate)" stroke-width="3.6" stroke-linecap="round"/>
+          <path d="M20 27l6-9" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="20" cy="27" r="2.6" fill="#fff"/>
+        </svg>
+        <span class="brand-text">
+          <strong>Used Car AI Advisor</strong>
+          <small>Deep Learning Valuation · Visual Inspection · Order Deal Sheet</small>
+        </span>
+      </a>
+
+      <nav class="tabs" role="tablist" aria-label="Sections">
+        <button class="tab" role="tab" id="t-estimate" data-tab="estimate" aria-selected="true" aria-controls="tab-estimate">Valuation & Inspection</button>
+        <button class="tab" role="tab" id="t-insights" data-tab="insights" aria-selected="false" aria-controls="tab-insights">Model Insights</button>
+        <button class="tab" role="tab" id="t-history" data-tab="history" aria-selected="false" aria-controls="tab-history">Deal History</button>
+      </nav>
+
+      <div class="status" id="status" role="status">
+        <span class="dot" data-state="wait"></span>
+        <span id="status-text">Connecting…</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="banner banner-error" id="global-error" hidden></div>
+
+    <!-- ============================== ESTIMATE & INSPECTION ============================== -->
+    <section class="view" id="tab-estimate" role="tabpanel" aria-labelledby="t-estimate">
+      <div class="estimate-grid">
+
+        <!-- Form Sidebar -->
+        <form class="panel form" id="car-form" novalidate autocomplete="off">
+          
+          <!-- 1. The Car Basics -->
+          <fieldset>
+            <legend><span class="fs-num">1</span> Car Specifications</legend>
+
+            <div class="field">
+              <label for="brand">Brand</label>
+              <select id="brand" name="brand" required></select>
+              <p class="err" data-err="brand"></p>
+            </div>
+
+            <div class="field">
+              <label for="model">Model</label>
+              <select id="model" name="model" required></select>
+              <p class="err" data-err="model"></p>
+              <p class="specs" id="specs" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <span class="label" id="fuel-label">Fuel Type</span>
+              <div class="seg" id="fuel" role="radiogroup" aria-labelledby="fuel-label"></div>
+              <p class="err" data-err="fuel"></p>
+            </div>
+
+            <div class="field">
+              <span class="label" id="trans-label">Transmission</span>
+              <div class="seg" id="transmission" role="radiogroup" aria-labelledby="trans-label"></div>
+              <p class="err" data-err="transmission"></p>
+            </div>
+          </fieldset>
+
+          <!-- 2. Usage Profile -->
+          <fieldset>
+            <legend><span class="fs-num">2</span> Age & Mileage</legend>
+
+            <div class="field">
+              <label for="year">Model Year</label>
+              <select id="year" name="year" required></select>
+              <p class="err" data-err="year"></p>
+            </div>
+
+            <div class="field">
+              <div class="label-row">
+                <label for="km">Kilometres Driven</label>
+                <output id="km-out" for="km"></output>
+              </div>
+              <div class="km-row">
+                <input type="range" id="km-range" min="0" max="250000" step="1000" aria-label="Kilometres driven slider">
+                <div class="affix">
+                  <input type="text" id="km" name="km" inputmode="numeric" required>
+                  <span>km</span>
+                </div>
+              </div>
+              <p class="err" data-err="km"></p>
+            </div>
+
+            <div class="field">
+              <span class="label" id="owner-label">Number of Owners</span>
+              <div class="seg" id="owner" role="radiogroup" aria-labelledby="owner-label"></div>
+              <p class="err" data-err="owner"></p>
+            </div>
+          </fieldset>
+
+          <!-- 3. Car Photos & AI Visual Inspector -->
+          <fieldset class="fs-photos">
+            <legend>
+              <span class="fs-num">3</span> Car Photos & Visual AI
+              <span class="opt">optional</span>
+            </legend>
+            <p class="hint">Upload car exterior, cabin, tyre or odometer photos. Our computer vision assesses paint luster, panel condition, and wear.</p>
+
+            <div class="photo-dropzone" id="photo-dropzone">
+              <input type="file" id="photo-input" multiple accept="image/*" class="sr">
+              <div class="dropzone-prompt">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span><strong>Click or drag photos</strong> (Front, Sides, Cabin, Tyres)</span>
+                <small>JPEG, PNG, WebP up to 30MB</small>
+              </div>
+            </div>
+
+            <!-- Uploaded Photos Previews -->
+            <div class="photos-preview-grid" id="photos-preview-grid" hidden></div>
+            <div class="visual-ai-status" id="visual-ai-status" hidden>
+              <span class="spinner-sm" id="visual-ai-spinner" hidden></span>
+              <span id="visual-ai-badge"></span>
+            </div>
+          </fieldset>
+
+          <!-- 4. 360° Pre-Purchase Condition Checklist -->
+          <fieldset class="fs-inspection">
+            <div class="inspection-legend-row">
+              <legend><span class="fs-num">4</span> 360° Inspection Checklist <span class="opt">Every Detail</span></legend>
+              <div class="checklist-actions">
+                <button type="button" class="btn-text-action" id="chk-all-good">All Clear</button>
+                <button type="button" class="btn-text-action" id="chk-reset">Reset</button>
+              </div>
+            </div>
+            <p class="hint">Check any defects discovered during inspection. AI will calculate the repair & refurbishment expense automatically.</p>
+
+            <!-- Checklist Category Tabs -->
+            <div class="inspect-tabs" role="tablist">
+              <button type="button" class="inspect-tab-btn active" data-cat="Mechanical">Engine</button>
+              <button type="button" class="inspect-tab-btn" data-cat="Exterior">Body</button>
+              <button type="button" class="inspect-tab-btn" data-cat="Interior">Cabin</button>
+              <button type="button" class="inspect-tab-btn" data-cat="Tyres & Suspension">Tyres</button>
+              <button type="button" class="inspect-tab-btn" data-cat="Legal & Paperwork">Papers</button>
+            </div>
+
+            <div class="inspect-list" id="inspect-list">
+              <!-- Dynamically populated from metadata inspection catalog -->
+            </div>
+
+            <!-- Live Refurbishment Expense Counter -->
+            <div class="refurb-tally" id="refurb-tally">
+              <span>Identified Refurbishment Expense:</span>
+              <strong id="refurb-tally-amt">₹0</strong>
+            </div>
+          </fieldset>
+
+          <!-- 5. Seller Asking Price -->
+          <fieldset>
+            <legend><span class="fs-num">5</span> Deal Check & Terms <span class="opt">optional</span></legend>
+            <div class="field">
+              <label for="asking">Seller's Asking Price</label>
+              <div class="affix affix-left">
+                <span>₹</span>
+                <input type="text" id="asking" name="asking" inputmode="numeric" placeholder="e.g. 11,50,000">
+              </div>
+              <p class="hint">Enter asking price to generate the complete financial deal sheet and negotiation strategy.</p>
+              <p class="err" data-err="asking"></p>
+            </div>
+          </fieldset>
+
+          <button class="btn-primary" type="submit" id="submit">
+            <span class="btn-label">Analyze Car & Generate Valuation</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <!-- Result Section -->
+        <section class="panel result" id="result" aria-live="polite" aria-busy="false">
+          
+          <div class="car-line" id="car-line" hidden>
+            <span class="plate" id="plate"><i>IND</i><b id="plate-text"></b></span>
+            <span class="car-title" id="car-title"></span>
+            <button type="button" class="btn-print-report" id="btn-print" title="Print or save PDF report">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print Report
+            </button>
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-note" id="empty-note">
+            <div class="empty-hero-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--petrol)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3>Complete AI Valuation & Pre-Purchase Advisory</h3>
+            <p>Select car specs, upload photos, or mark inspection points to generate an exhaustive, transparent report.</p>
+            <div class="features-trio">
+              <div class="feat-card">
+                <strong>🤖 AI Buying Recommendation</strong>
+                <span>Overall Buy Index (0-100), 4 Evaluation Pillars, and decisive risk highlights.</span>
+              </div>
+              <div class="feat-card">
+                <strong>📸 Visual Photo Inspection</strong>
+                <span>Computer vision analyzes paint luster, reflection, and cosmetic condition.</span>
+              </div>
+              <div class="feat-card">
+                <strong>📑 Complete Order Deal Sheet</strong>
+                <span>Itemized True On-Road Cost, recommended counter-offer, and negotiation playbook.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Full Results Area -->
+          <div class="detail" id="detail" hidden>
+
+            <!-- A. HERO AI BUYING ADVISORY BANNER -->
+            <div class="advisory-hero-card" id="advisory-hero">
+              <div class="advisory-main">
+                <div class="verdict-pill-wrap">
+                  <span class="verdict-badge" id="adv-badge">RECOMMENDED BUY</span>
+                  <span class="verdict-conf">Deep Neural Network · 60 MC Passes</span>
+                </div>
+                <h2 class="advisory-headline" id="adv-headline">Outstanding Value & Low Risk Opportunity</h2>
+                <p class="advisory-summary" id="adv-summary"></p>
+              </div>
+
+              <!-- Buy Index Radial Gauge -->
+              <div class="buy-index-box">
+                <div class="buy-index-circle" id="adv-index-circle">
+                  <span class="index-score" id="adv-index-score">86</span>
+                  <span class="index-label">Buy Index</span>
+                </div>
+                <span class="index-scale">out of 100</span>
+              </div>
+            </div>
+
+            <!-- B. 4 EVALUATION PILLARS -->
+            <div class="pillars-grid">
+              <div class="pillar-card">
+                <div class="pillar-head">
+                  <span class="pillar-icon">💰</span>
+                  <span class="pillar-name">Value Score</span>
+                  <strong class="pillar-val" id="pil-val">85%</strong>
+                </div>
+                <div class="pillar-bar"><div class="pillar-fill" id="pil-val-bar" style="width: 85%"></div></div>
+                <small class="pillar-note">Market price fairness & equity retention</small>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-head">
+                  <span class="pillar-icon">🛡️</span>
+                  <span class="pillar-name">Reliability</span>
+                  <strong class="pillar-val" id="pil-rel">92%</strong>
+                </div>
+                <div class="pillar-bar"><div class="pillar-fill" id="pil-rel-bar" style="width: 92%"></div></div>
+                <small class="pillar-note">Brand network & mechanical durability</small>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-head">
+                  <span class="pillar-icon">⏱️</span>
+                  <span class="pillar-name">Usage Risk</span>
+                  <strong class="pillar-val" id="pil-use">88%</strong>
+                </div>
+                <div class="pillar-bar"><div class="pillar-fill" id="pil-use-bar" style="width: 88%"></div></div>
+                <small class="pillar-note">Annual running pace & owner history</small>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-head">
+                  <span class="pillar-icon">🔍</span>
+                  <span class="pillar-name">Condition</span>
+                  <strong class="pillar-val" id="pil-cnd">80%</strong>
+                </div>
+                <div class="pillar-bar"><div class="pillar-fill" id="pil-cnd-bar" style="width: 80%"></div></div>
+                <small class="pillar-note">Visual AI rating & 360° checklist</small>
+              </div>
+            </div>
+
+            <!-- C. "WHAT MATTERS MOST FOR THIS CAR" KEY FACTORS -->
+            <div class="section-block">
+              <h3 class="sec-title">What Matters Most For This Car</h3>
+              <p class="sec-sub">Decisive technical, regulatory, and financial priorities specifically ranked for this vehicle:</p>
+              <div class="key-factors-list" id="key-factors-list"></div>
+            </div>
+
+            <!-- D. VALUATION ODOMETER & CONFIDENCE RANGE -->
+            <div class="section-block valuation-section">
+              <div class="val-head">
+                <div>
+                  <h3 class="sec-title">Estimated Fair Market Value</h3>
+                  <p class="sec-sub">Deep Neural Network prediction with Monte Carlo Dropout uncertainty</p>
+                </div>
+                <div class="odo-wrap">
+                  <div class="odometer" id="odometer" role="img" aria-label="Estimated price"></div>
+                </div>
+              </div>
+
+              <div class="range" id="range">
+                <div class="range-head">
+                  <span>Likely Fair Market Range (80% Confidence Interval)</span>
+                  <strong id="range-text"></strong>
+                </div>
+                <div class="track" id="track">
+                  <div class="band" id="band"></div>
+                  <div class="mark est" id="mark-est"><span>Estimate</span></div>
+                  <div class="mark ask" id="mark-ask" hidden><span>Asking</span></div>
+                </div>
+              </div>
+
+              <div class="verdict" id="verdict" hidden>
+                <strong id="verdict-title"></strong>
+                <p id="verdict-text"></p>
+              </div>
+
+              <dl class="facts">
+                <div><dt>Nearly New Price</dt><dd id="f-new">—</dd></div>
+                <div><dt>Value Retained</dt><dd id="f-kept">—</dd></div>
+                <div><dt>Vehicle Age</dt><dd id="f-age">—</dd></div>
+                <div><dt>Depreciation / Year</dt><dd id="f-loss">—</dd></div>
+              </dl>
+            </div>
+
+            <!-- E. SYSTEMATIC STEP-BY-STEP VALUATION WATERFALL -->
+            <div class="section-block">
+              <h3 class="sec-title">Systematic Valuation Analysis (Step-by-Step)</h3>
+              <p class="sec-sub">Transparent mathematical breakdown of how neural network embeddings and condition factors formed this valuation:</p>
+              <div class="waterfall-grid" id="waterfall-grid"></div>
+            </div>
+
+            <!-- F. ORDER DETAILS & FINANCIAL DEAL SHEET -->
+            <div class="section-block deal-sheet-section">
+              <h3 class="sec-title">Car Order & Financial Deal Sheet</h3>
+              <p class="sec-sub">Itemized acquisition expenses, recommended counter-offer, and negotiation limits:</p>
+
+              <div class="deal-sheet-card">
+                <table class="deal-table">
+                  <tbody>
+                    <tr>
+                      <td>Seller's Asking Price</td>
+                      <td class="num font-bold" id="ds-asking">—</td>
+                    </tr>
+                    <tr>
+                      <td>AI Estimated Fair Market Valuation</td>
+                      <td class="num font-bold text-petrol" id="ds-market">—</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Identified Repairs & Refurbishment Required
+                        <small class="ds-subtext" id="ds-defects-sub">0 defects flagged</small>
+                      </td>
+                      <td class="num text-bad" id="ds-refurb">—</td>
+                    </tr>
+                    <tr>
+                      <td>Estimated RTO Transfer & Documentation</td>
+                      <td class="num" id="ds-rto">₹2,500</td>
+                    </tr>
+                    <tr>
+                      <td>Estimated 1-Year Comprehensive Insurance</td>
+                      <td class="num" id="ds-insurance">—</td>
+                    </tr>
+                    <tr class="deal-total-row">
+                      <td>
+                        <strong>True Total On-Road Acquisition Cost</strong>
+                        <small class="ds-subtext">Purchase price + immediate servicing + paperwork</small>
+                      </td>
+                      <td class="num font-extrabold text-lg" id="ds-total-onroad">—</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="deal-strategy-box">
+                  <div class="strategy-col">
+                    <span class="strat-label">Recommended Counter-Offer</span>
+                    <strong class="strat-val highlight-green" id="ds-counter">—</strong>
+                    <small>Fair offer to present the seller</small>
+                  </div>
+                  <div class="strategy-divider"></div>
+                  <div class="strategy-col">
+                    <span class="strat-label">Maximum Walk-Away Price</span>
+                    <strong class="strat-val highlight-red" id="ds-walkaway">—</strong>
+                    <small>Do not pay above this ceiling</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- G. BUYER'S NEGOTIATION PLAYBOOK -->
+            <div class="section-block">
+              <h3 class="sec-title">Buyer's Negotiation Playbook</h3>
+              <p class="sec-sub">Actionable, professional talking points to use during seller negotiations:</p>
+              <div class="scripts-grid" id="scripts-grid"></div>
+            </div>
+
+            <!-- H. 3-YEAR TOTAL COST OF OWNERSHIP (TCO) -->
+            <div class="section-block">
+              <h3 class="sec-title">3-Year Ownership Cost Projection (TCO)</h3>
+              <p class="sec-sub">Estimated fuel, scheduled servicing, insurance renewals, and retained equity:</p>
+              <div class="tco-table-wrap">
+                <table class="tco-table">
+                  <thead>
+                    <tr>
+                      <th>Year</th>
+                      <th class="num">Fuel Cost</th>
+                      <th class="num">Service & Repairs</th>
+                      <th class="num">Insurance</th>
+                      <th class="num">Retained Value</th>
+                      <th class="num">Annual Expense</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tco-body"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- I. VISUAL INSPECTION GALLERY (IF PHOTOS UPLOADED) -->
+            <div class="section-block" id="photo-gallery-section" hidden>
+              <h3 class="sec-title">Uploaded Photo Inspection Gallery</h3>
+              <p class="sec-sub">Computer vision assessments and detected cosmetic characteristics:</p>
+              <div class="photo-gallery-grid" id="photo-gallery-grid"></div>
+            </div>
+
+            <!-- J. DEPRECIATION CURVES -->
+            <div class="charts">
+              <figure>
+                <figcaption>
+                  <strong>Price by Model Year</strong>
+                  <span id="cap-year">Same car, driven at your pace</span>
+                </figcaption>
+                <div class="chart-box"><canvas id="chart-year" role="img" aria-label="Line chart of price by model year"></canvas></div>
+              </figure>
+              <figure>
+                <figcaption>
+                  <strong>Price by Kilometres Driven</strong>
+                  <span>Same car and year, different odometer</span>
+                </figcaption>
+                <div class="chart-box"><canvas id="chart-km" role="img" aria-label="Line chart of price by kilometres driven"></canvas></div>
+              </figure>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================== INSIGHTS ============================== -->
+    <section class="view" id="tab-insights" role="tabpanel" aria-labelledby="t-insights" hidden>
+      <div class="insights" id="insights">
+        <p class="loading-note">Loading model details…</p>
+      </div>
+    </section>
+
+    <!-- ============================== HISTORY ============================== -->
+    <section class="view" id="tab-history" role="tabpanel" aria-labelledby="t-history" hidden>
+      <div class="panel history">
+        <div class="history-head">
+          <div>
+            <h2>Past Valuations & Deal Sheets</h2>
+            <p id="history-sub">Every valuation is stored with its AI Buying Advisory, inspection tally, and deal breakdown.</p>
+          </div>
+          <button class="btn-quiet" id="clear-history" type="button">Clear All</button>
+        </div>
+        <div class="table-wrap">
+          <table id="history-table">
+            <thead>
+              <tr>
+                <th>When</th>
+                <th>Car & Photo</th>
+                <th>AI Recommendation</th>
+                <th class="num">Km</th>
+                <th>Fuel</th>
+                <th class="num">Estimated Value</th>
+                <th class="num">Asking Price</th>
+                <th class="num">Repairs</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+        <p class="empty-history" id="history-empty" hidden>No estimates yet. Run one from the Valuation & Inspection tab to save it here.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Full Report Modal (For History items) -->
+  <dialog class="modal-dialog" id="deal-modal">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h3 id="modal-car-title">Car Deal Report</h3>
+        <button type="button" class="btn-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </dialog>
+
+  <footer class="foot">
+    <p>Mini Project · Department of Information Technology · 2026-27</p>
+    <p>Himanshu Chhapparghare · Swayam Dhokte · Aditya Dubey &nbsp;|&nbsp; Guide: Mrs. Natasha Naik</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='vendor/chart.umd.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

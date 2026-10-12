@@ -1,0 +1,712 @@
+{
+ "ref_year": 2026,
+ "min_year": 2011,
+ "brands": [
+  "Ford",
+  "Honda",
+  "Hyundai",
+  "Kia",
+  "Mahindra",
+  "Maruti Suzuki",
+  "Renault",
+  "Skoda",
+  "Tata",
+  "Toyota",
+  "Volkswagen"
+ ],
+ "models": [
+  "Ford|EcoSport",
+  "Honda|Amaze",
+  "Honda|City",
+  "Hyundai|Creta",
+  "Hyundai|Grand i10 Nios",
+  "Hyundai|Venue",
+  "Hyundai|Verna",
+  "Hyundai|i20",
+  "Kia|Carens",
+  "Kia|Seltos",
+  "Kia|Sonet",
+  "Mahindra|Scorpio N",
+  "Mahindra|Thar",
+  "Mahindra|XUV300",
+  "Mahindra|XUV700",
+  "Maruti Suzuki|Baleno",
+  "Maruti Suzuki|Brezza",
+  "Maruti Suzuki|Dzire",
+  "Maruti Suzuki|Ertiga",
+  "Maruti Suzuki|Swift",
+  "Maruti Suzuki|WagonR",
+  "Renault|Kiger",
+  "Renault|Kwid",
+  "Skoda|Kushaq",
+  "Skoda|Slavia",
+  "Tata|Altroz",
+  "Tata|Harrier",
+  "Tata|Nexon",
+  "Tata|Punch",
+  "Tata|Tiago",
+  "Toyota|Fortuner",
+  "Toyota|Glanza",
+  "Toyota|Innova Crysta",
+  "Volkswagen|Polo",
+  "Volkswagen|Virtus"
+ ],
+ "fuels": [
+  "CNG",
+  "Diesel",
+  "Electric",
+  "Petrol"
+ ],
+ "transmissions": [
+  "Automatic",
+  "Manual"
+ ],
+ "mean": {
+  "age": 4.275906562805176,
+  "log_km": 10.160103797912598,
+  "engine_cc": 1371.2119140625,
+  "power_bhp": 104.0540771484375,
+  "seats": 5.287625789642334,
+  "log_showroom": 2.3142478466033936
+ },
+ "std": {
+  "age": 3.902534008026123,
+  "log_km": 1.4901041984558105,
+  "engine_cc": 395.4659118652344,
+  "power_bhp": 31.09681510925293,
+  "seats": 0.7474523782730103,
+  "log_showroom": 0.3979302942752838
+ },
+ "specs": {
+  "Ford|EcoSport": {
+   "showroom": 10.5,
+   "fuels": {
+    "Diesel": {
+     "cc": 1497,
+     "bhp": 121,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1497,
+     "bhp": 121,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Honda|Amaze": {
+   "showroom": 8.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1199,
+     "bhp": 89,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1199,
+     "bhp": 89,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Honda|City": {
+   "showroom": 13.0,
+   "fuels": {
+    "Petrol": {
+     "cc": 1498,
+     "bhp": 119,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Hyundai|Creta": {
+   "showroom": 15.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Hyundai|Grand i10 Nios": {
+   "showroom": 6.8,
+   "fuels": {
+    "CNG": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Hyundai|Venue": {
+   "showroom": 10.5,
+   "fuels": {
+    "Diesel": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Hyundai|Verna": {
+   "showroom": 12.5,
+   "fuels": {
+    "Diesel": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Hyundai|i20": {
+   "showroom": 8.5,
+   "fuels": {
+    "Diesel": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Kia|Carens": {
+   "showroom": 12.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 7
+    },
+    "Petrol": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 7
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Kia|Seltos": {
+   "showroom": 15.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1497,
+     "bhp": 113,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Kia|Sonet": {
+   "showroom": 10.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Mahindra|Scorpio N": {
+   "showroom": 17.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 2184,
+     "bhp": 172,
+     "seats": 7
+    },
+    "Petrol": {
+     "cc": 2184,
+     "bhp": 172,
+     "seats": 7
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Mahindra|Thar": {
+   "showroom": 15.5,
+   "fuels": {
+    "Diesel": {
+     "cc": 2184,
+     "bhp": 130,
+     "seats": 4
+    },
+    "Petrol": {
+     "cc": 2184,
+     "bhp": 130,
+     "seats": 4
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Mahindra|XUV300": {
+   "showroom": 10.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1197,
+     "bhp": 110,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 110,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Mahindra|XUV700": {
+   "showroom": 18.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1999,
+     "bhp": 197,
+     "seats": 7
+    },
+    "Petrol": {
+     "cc": 1999,
+     "bhp": 197,
+     "seats": 7
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Maruti Suzuki|Baleno": {
+   "showroom": 7.8,
+   "fuels": {
+    "CNG": {
+     "cc": 1197,
+     "bhp": 88,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 88,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Maruti Suzuki|Brezza": {
+   "showroom": 10.5,
+   "fuels": {
+    "CNG": {
+     "cc": 1462,
+     "bhp": 103,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1462,
+     "bhp": 103,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Maruti Suzuki|Dzire": {
+   "showroom": 7.8,
+   "fuels": {
+    "CNG": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Maruti Suzuki|Ertiga": {
+   "showroom": 10.5,
+   "fuels": {
+    "CNG": {
+     "cc": 1462,
+     "bhp": 103,
+     "seats": 7
+    },
+    "Petrol": {
+     "cc": 1462,
+     "bhp": 103,
+     "seats": 7
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Maruti Suzuki|Swift": {
+   "showroom": 7.0,
+   "fuels": {
+    "CNG": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 82,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Maruti Suzuki|WagonR": {
+   "showroom": 6.0,
+   "fuels": {
+    "CNG": {
+     "cc": 998,
+     "bhp": 66,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 998,
+     "bhp": 66,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Renault|Kiger": {
+   "showroom": 8.0,
+   "fuels": {
+    "Petrol": {
+     "cc": 999,
+     "bhp": 72,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Renault|Kwid": {
+   "showroom": 5.0,
+   "fuels": {
+    "Petrol": {
+     "cc": 999,
+     "bhp": 67,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Skoda|Kushaq": {
+   "showroom": 15.0,
+   "fuels": {
+    "Petrol": {
+     "cc": 999,
+     "bhp": 113,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Skoda|Slavia": {
+   "showroom": 14.0,
+   "fuels": {
+    "Petrol": {
+     "cc": 999,
+     "bhp": 113,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Tata|Altroz": {
+   "showroom": 8.2,
+   "fuels": {
+    "Diesel": {
+     "cc": 1199,
+     "bhp": 86,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1199,
+     "bhp": 86,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Tata|Harrier": {
+   "showroom": 20.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1956,
+     "bhp": 167,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Tata|Nexon": {
+   "showroom": 11.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 1199,
+     "bhp": 118,
+     "seats": 5
+    },
+    "Electric": {
+     "cc": 0,
+     "bhp": 127,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1199,
+     "bhp": 118,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Tata|Punch": {
+   "showroom": 7.5,
+   "fuels": {
+    "CNG": {
+     "cc": 1199,
+     "bhp": 86,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1199,
+     "bhp": 86,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Tata|Tiago": {
+   "showroom": 6.2,
+   "fuels": {
+    "CNG": {
+     "cc": 1199,
+     "bhp": 86,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1199,
+     "bhp": 86,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Toyota|Fortuner": {
+   "showroom": 38.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 2755,
+     "bhp": 201,
+     "seats": 7
+    },
+    "Petrol": {
+     "cc": 2755,
+     "bhp": 201,
+     "seats": 7
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Toyota|Glanza": {
+   "showroom": 8.0,
+   "fuels": {
+    "CNG": {
+     "cc": 1197,
+     "bhp": 88,
+     "seats": 5
+    },
+    "Petrol": {
+     "cc": 1197,
+     "bhp": 88,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Toyota|Innova Crysta": {
+   "showroom": 23.0,
+   "fuels": {
+    "Diesel": {
+     "cc": 2393,
+     "bhp": 148,
+     "seats": 7
+    },
+    "Petrol": {
+     "cc": 2393,
+     "bhp": 148,
+     "seats": 7
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Volkswagen|Polo": {
+   "showroom": 8.5,
+   "fuels": {
+    "Petrol": {
+     "cc": 999,
+     "bhp": 108,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  },
+  "Volkswagen|Virtus": {
+   "showroom": 14.0,
+   "fuels": {
+    "Petrol": {
+     "cc": 999,
+     "bhp": 113,
+     "seats": 5
+    }
+   },
+   "transmissions": [
+    "Automatic",
+    "Manual"
+   ]
+  }
+ }
+}
