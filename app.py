@@ -33,7 +33,8 @@ app = Flask(
 app.config["MAX_CONTENT_LENGTH"] = 32 * 1024 * 1024
 CORS(app)
 
-store = Store(file_path=os.path.join(BASE_DIR, "data", "history.json"))
+db_path = "/tmp/history.json" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else os.path.join(BASE_DIR, "data", "history.json")
+store = Store(file_path=db_path)
 try:
     predictor = Predictor(artifacts_dir=os.path.join(BASE_DIR, "artifacts"))
     load_error = None

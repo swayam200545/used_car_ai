@@ -19,7 +19,12 @@ except Exception:  # pymongo not installed
 
 
 class Store:
-    def __init__(self, file_path=os.path.join("data", "history.json")):
+    def __init__(self, file_path=None):
+        if file_path is None:
+            if os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+                file_path = "/tmp/history.json"
+            else:
+                file_path = os.path.join("data", "history.json")
         self.file_path = file_path
         self._lock = threading.Lock()
         self.col = None
