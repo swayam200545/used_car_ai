@@ -24,14 +24,19 @@ from db import Store
 from ml.image_analyzer import aggregate_images_analysis, analyze_car_image
 from ml.predictor import ModelNotTrained, Predictor, ValidationError
 
-app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, "templates"),
+    static_folder=os.path.join(BASE_DIR, "static"),
+)
 # Allow max 32MB file uploads for multi-angle car photos
 app.config["MAX_CONTENT_LENGTH"] = 32 * 1024 * 1024
 CORS(app)
 
-store = Store()
+store = Store(file_path=os.path.join(BASE_DIR, "data", "history.json"))
 try:
-    predictor = Predictor()
+    predictor = Predictor(artifacts_dir=os.path.join(BASE_DIR, "artifacts"))
     load_error = None
 except ModelNotTrained as e:
     predictor, load_error = None, str(e)

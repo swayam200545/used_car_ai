@@ -14,7 +14,10 @@ os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
 
 import numpy as np
 import pandas as pd
-from tensorflow import keras
+try:
+    from tensorflow import keras
+except Exception:
+    keras = None
 
 from ml.features import OWNER_LABELS, Preprocessor
 from ml.advisory import evaluate_advisory, DEFECT_COSTS
@@ -48,13 +51,71 @@ class ValidationError(ValueError):
         self.field, self.message = field, message
 
 
+class NumpyModel:
+    """Lightweight pure-NumPy inference runner (runs anywhere without TensorFlow)."""
+    def __init__(self, npz_path):
+        data = np.load(npz_path)
+        self.w = {k: data[k] for k in data.files}
+
+    def predict(self, inp, verbose=0, batch_size=256):
+        return self._forward(inp, training=False)
+
+    def __call__(self, inp, training=False):
+        res = self._forward(inp, training=training)
+        class DummyTensor:
+            def __init__(self, val):
+                self.val = val
+            def numpy(self):
+                return self.val
+        return DummyTensor(res)
+
+    def _forward(self, inp, training=False):
+        b = self.w["emb_brand_0"][inp["brand"].ravel()]
+        m = self.w["emb_model_0"][inp["model"].ravel()]
+        f = self.w["emb_fuel_0"][inp["fuel"].ravel()]
+        t = self.w["emb_transmission_0"][inp["transmission"].ravel()]
+        o = self.w["emb_owner_0"][inp["owner"].ravel()]
+        num = inp["num"]
+
+        x = np.concatenate([b, m, f, t, o, num], axis=1)
+
+        d1 = 0.15
+        h1 = np.maximum(0, np.dot(x, self.w["dense_0"]) + self.w["dense_1"])
+        if training:
+            mask1 = (np.random.rand(*h1.shape) >= d1) / (1.0 - d1)
+            h1 = h1 * mask1
+
+        d2 = 0.15
+        h2 = np.maximum(0, np.dot(h1, self.w["dense_1_0"]) + self.w["dense_1_1"])
+        if training:
+            mask2 = (np.random.rand(*h2.shape) >= d2) / (1.0 - d2)
+            h2 = h2 * mask2
+
+        d3 = 0.10
+        h3 = np.maximum(0, np.dot(h2, self.w["dense_2_0"]) + self.w["dense_2_1"])
+        if training:
+            mask3 = (np.random.rand(*h3.shape) >= d3) / (1.0 - d3)
+            h3 = h3 * mask3
+
+        out = np.dot(h3, self.w["log_price_0"]) + self.w["log_price_1"]
+        return out
+
+
 class Predictor:
     def __init__(self, artifacts_dir="artifacts"):
         model_path = os.path.join(artifacts_dir, "model.keras")
+        npz_path = os.path.join(artifacts_dir, "weights.npz")
         pp_path = os.path.join(artifacts_dir, "preprocess.json")
-        if not (os.path.exists(model_path) and os.path.exists(pp_path)):
-            raise ModelNotTrained("Model not trained yet. Run:  python -m ml.train")
-        self.model = keras.models.load_model(model_path, compile=False)
+
+        if not os.path.exists(pp_path):
+            raise ModelNotTrained("Model preprocessing not found. Run: python -m ml.train")
+
+        if os.path.exists(npz_path):
+            self.model = NumpyModel(npz_path)
+        elif keras is not None and os.path.exists(model_path):
+            self.model = keras.models.load_model(model_path, compile=False)
+        else:
+            raise ModelNotTrained("Model weights not found. Run: python -m ml.train")
         self.pp = Preprocessor.load(pp_path)
         self.metrics = {}
         mp = os.path.join(artifacts_dir, "metrics.json")
