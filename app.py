@@ -36,16 +36,20 @@ CORS(app)
 
 
 class PrefixMiddleware:
-    """Strips serverless gateway prefixes from PATH_INFO."""
+    """Restores the original request path from Vercel's HTTP_X_MATCHED_PATH header."""
     def __init__(self, wsgi_app):
         self.wsgi_app = wsgi_app
 
     def __call__(self, environ, start_response):
-        path = environ.get("PATH_INFO", "")
-        for p in ["/api/index.py", "/api/index"]:
-            if path.startswith(p):
-                environ["PATH_INFO"] = path[len(p):] or "/"
-                break
+        matched = environ.get("HTTP_X_MATCHED_PATH")
+        if matched and not matched.startswith("/api/index"):
+            environ["PATH_INFO"] = matched
+        else:
+            path = environ.get("PATH_INFO", "")
+            for p in ["/api/index.py", "/api/index"]:
+                if path.startswith(p):
+                    environ["PATH_INFO"] = path[len(p):] or "/"
+                    break
         return self.wsgi_app(environ, start_response)
 
 
@@ -75,6 +79,13 @@ def index():
 @app.get("/static/<path:filename>")
 def serve_static(filename):
     return send_from_directory(os.path.join(BASE_DIR, "static"), filename)
+
+
+@app.route("/api/test-env")
+def test_env():
+    return jsonify({
+        k: str(v) for k, v in request.environ.items() if isinstance(v, (str, int, float))
+    })
 
 
 @app.get("/api/health")
