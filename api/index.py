@@ -7,6 +7,3 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 from app import app
-
-# Export for both Flask WSGI and Vercel handler conventions
-handler = app
