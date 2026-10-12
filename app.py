@@ -36,15 +36,16 @@ CORS(app)
 
 
 class PrefixMiddleware:
-    """Strips serverless gateway prefixes (e.g. /api/index) from PATH_INFO."""
-    def __init__(self, wsgi_app, prefix="/api/index"):
+    """Strips serverless gateway prefixes from PATH_INFO."""
+    def __init__(self, wsgi_app):
         self.wsgi_app = wsgi_app
-        self.prefix = prefix
 
     def __call__(self, environ, start_response):
         path = environ.get("PATH_INFO", "")
-        if path.startswith(self.prefix):
-            environ["PATH_INFO"] = path[len(self.prefix):] or "/"
+        for p in ["/api/index.py", "/api/index"]:
+            if path.startswith(p):
+                environ["PATH_INFO"] = path[len(p):] or "/"
+                break
         return self.wsgi_app(environ, start_response)
 
 
