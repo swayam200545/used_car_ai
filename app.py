@@ -17,8 +17,7 @@ REST API
 import base64
 import os
 
-from flask import Flask, jsonify, render_template, request
-from flask_cors import CORS
+from flask import Flask, jsonify, render_template, request, send_from_directory
 
 from db import Store
 from ml.image_analyzer import aggregate_images_analysis, analyze_car_image
@@ -51,6 +50,11 @@ def _need_model():
 @app.get("/")
 def index():
     return render_template("index.html")
+
+
+@app.get("/static/<path:filename>")
+def serve_static(filename):
+    return send_from_directory(os.path.join(BASE_DIR, "static"), filename)
 
 
 @app.get("/api/health")
