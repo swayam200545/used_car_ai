@@ -34,6 +34,22 @@ app = Flask(
 app.config["MAX_CONTENT_LENGTH"] = 32 * 1024 * 1024
 CORS(app)
 
+
+class PrefixMiddleware:
+    """Strips serverless gateway prefixes (e.g. /api/index) from PATH_INFO."""
+    def __init__(self, wsgi_app, prefix="/api/index"):
+        self.wsgi_app = wsgi_app
+        self.prefix = prefix
+
+    def __call__(self, environ, start_response):
+        path = environ.get("PATH_INFO", "")
+        if path.startswith(self.prefix):
+            environ["PATH_INFO"] = path[len(self.prefix):] or "/"
+        return self.wsgi_app(environ, start_response)
+
+
+app.wsgi_app = PrefixMiddleware(app.wsgi_app)
+
 db_path = "/tmp/history.json" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else os.path.join(BASE_DIR, "data", "history.json")
 store = Store(file_path=db_path)
 try:
@@ -50,6 +66,7 @@ def _need_model():
 
 
 @app.get("/")
+@app.get("/api/index")
 def index():
     return render_template("index.html")
 
