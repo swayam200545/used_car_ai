@@ -34,27 +34,6 @@ app = Flask(
 app.config["MAX_CONTENT_LENGTH"] = 32 * 1024 * 1024
 CORS(app)
 
-
-class PrefixMiddleware:
-    """Restores the original request path from Vercel's HTTP_X_MATCHED_PATH header."""
-    def __init__(self, wsgi_app):
-        self.wsgi_app = wsgi_app
-
-    def __call__(self, environ, start_response):
-        matched = environ.get("HTTP_X_MATCHED_PATH")
-        if matched and not matched.startswith("/api/index"):
-            environ["PATH_INFO"] = matched
-        else:
-            path = environ.get("PATH_INFO", "")
-            for p in ["/api/index.py", "/api/index"]:
-                if path.startswith(p):
-                    environ["PATH_INFO"] = path[len(p):] or "/"
-                    break
-        return self.wsgi_app(environ, start_response)
-
-
-app.wsgi_app = PrefixMiddleware(app.wsgi_app)
-
 db_path = "/tmp/history.json" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else os.path.join(BASE_DIR, "data", "history.json")
 store = Store(file_path=db_path)
 try:
@@ -71,7 +50,6 @@ def _need_model():
 
 
 @app.get("/")
-@app.get("/api/index")
 def index():
     return render_template("index.html")
 
