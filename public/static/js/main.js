@@ -99,12 +99,13 @@
 
   /* ---------------------------------------------------------------- tabs */
   function showTab(name, updateHash = true) {
-    if (!["estimate", "insights", "history"].includes(name)) name = "estimate";
+    if (!["home", "estimate", "insights", "history"].includes(name)) name = "home";
     $$(".tab").forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
     $$(".view").forEach((v) => (v.hidden = v.id !== "tab-" + name));
     if (updateHash) history.replaceState(null, "", "#" + name);
     if (name === "insights") loadInsights();
     if (name === "history") loadHistory();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   /* ---------------------------------------------------------------- form */
@@ -942,8 +943,28 @@
     setOdometer(0);
 
     $$(".tab").forEach((t) => t.addEventListener("click", () => showTab(t.dataset.tab)));
-    $(".brand").addEventListener("click", (e) => { e.preventDefault(); showTab("estimate"); });
+    $(".brand").addEventListener("click", (e) => { e.preventDefault(); showTab("home"); });
     window.addEventListener("hashchange", () => showTab(location.hash.slice(1), false));
+
+    // Landing page interactive action buttons
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-action]");
+      if (!btn) return;
+      const act = btn.dataset.action;
+      if (act === "go-estimate") {
+        showTab("estimate");
+      } else if (act === "go-insights") {
+        showTab("insights");
+      } else if (act === "quick-car") {
+        const brand = btn.dataset.brand;
+        const model = btn.dataset.model;
+        if (state.meta && state.meta.catalog && brand && state.meta.catalog[brand]) {
+          $("#brand").value = brand;
+          onBrandChange(model);
+        }
+        showTab("estimate");
+      }
+    });
 
     $("#clear-history")?.addEventListener("click", async () => {
       if (!confirm("Delete all saved valuations?")) return;
@@ -968,7 +989,11 @@
       $("#submit").disabled = true;
     }
 
-    if (location.hash) showTab(location.hash.slice(1), false);
+    if (location.hash) {
+      showTab(location.hash.slice(1), false);
+    } else {
+      showTab("home", false);
+    }
   }
 
   document.addEventListener("DOMContentLoaded", init);

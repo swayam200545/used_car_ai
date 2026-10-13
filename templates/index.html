@@ -28,7 +28,8 @@
       </a>
 
       <nav class="tabs" role="tablist" aria-label="Sections">
-        <button class="tab" role="tab" id="t-estimate" data-tab="estimate" aria-selected="true" aria-controls="tab-estimate">Valuation & Inspection</button>
+        <button class="tab" role="tab" id="t-home" data-tab="home" aria-selected="true" aria-controls="tab-home">Home &amp; Features</button>
+        <button class="tab" role="tab" id="t-estimate" data-tab="estimate" aria-selected="false" aria-controls="tab-estimate">Valuation &amp; Inspection</button>
         <button class="tab" role="tab" id="t-insights" data-tab="insights" aria-selected="false" aria-controls="tab-insights">Model Insights</button>
         <button class="tab" role="tab" id="t-history" data-tab="history" aria-selected="false" aria-controls="tab-history">Deal History</button>
       </nav>
@@ -43,8 +44,333 @@
   <main id="main">
     <div class="banner banner-error" id="global-error" hidden></div>
 
+    <!-- ============================== HOME & FEATURES ============================== -->
+    <section class="view" id="tab-home" role="tabpanel" aria-labelledby="t-home">
+      <!-- 1. HERO SECTION -->
+      <div class="landing-hero">
+        <div class="hero-left">
+          <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>Deep Learning &amp; Computer Vision Platform</span>
+          </div>
+          <h1 class="hero-title">
+            The Intelligent <span class="text-gradient">Used Car Valuation</span> &amp; Buying Advisory
+          </h1>
+          <p class="hero-subtitle">
+            Trained on 15,000+ Indian pre-owned vehicle transactions. Get transparent fair market valuations, 360° AI visual condition grading, itemized deal sheets, and data-backed negotiation scripts.
+          </p>
+          <div class="hero-cta-group">
+            <button type="button" class="btn-primary hero-btn-main" data-action="go-estimate">
+              <span>Get Started · Evaluate a Car</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.167 10h11.666m-4.166-4.167L15.833 10l-4.166 4.167" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" class="btn-secondary hero-btn-sub" data-action="go-insights">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+              <span>Explore AI Architecture</span>
+            </button>
+          </div>
+
+          <div class="hero-metrics-row">
+            <div class="metric-item">
+              <strong class="metric-num">97.8%</strong>
+              <span class="metric-lbl">R² Regression Accuracy</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <strong class="metric-num">48,801</strong>
+              <span class="metric-lbl">Neural Parameters</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <strong class="metric-num">19+</strong>
+              <span class="metric-lbl">Inspection Checkpoints</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <strong class="metric-num">₹0</strong>
+              <span class="metric-lbl">Overpaying Ceiling</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-media-card">
+            <img src="/static/images/hero-car.jpg" alt="AI Evaluated Luxury SUV" class="hero-img" loading="eager">
+            <div class="hero-overlay-tag top-left">
+              <span class="pulse-indicator"></span>
+              <div>
+                <small>AI Fair Market Value</small>
+                <strong>₹6,45,000</strong>
+              </div>
+            </div>
+            <div class="hero-overlay-tag top-right">
+              <span class="badge-icon">⭐</span>
+              <div>
+                <small>Overall Buy Index</small>
+                <strong>88 / 100 · Strong Buy</strong>
+              </div>
+            </div>
+            <div class="hero-overlay-tag bottom-bar">
+              <div class="tag-meta-info">
+                <span>🛡️ 360° Visual Condition: <strong>Pristine</strong></span>
+                <span>⚡ Estimated Refurbishment: <strong>₹0</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. FEATURES GRID (EVERY SINGLE FEATURE DETAILED) -->
+      <div class="home-section">
+        <div class="section-heading text-center">
+          <span class="subheading-tag">End-to-End Capabilities</span>
+          <h2 class="section-headline">Everything Our AI Used Car Advisor Does For You</h2>
+          <p class="section-description">
+            Traditional car pricing tools only look at basic averages. Our platform combines deep neural networks, computer vision, and financial advisory into a complete purchase intelligence system.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <div class="feat-icon-wrap feat-blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <span class="feat-badge">Deep Neural Network</span>
+            <h3 class="feat-title">48.8K Parameter Pricing Engine</h3>
+            <p class="feat-text">
+              Multi-layer dense network with categorical embeddings for make and model. Predicts exact market valuation with 95% confidence intervals calculated via Monte Carlo dropout.
+            </p>
+            <ul class="feat-list">
+              <li>Continuous non-linear depreciation curves</li>
+              <li>Trained on 15,000+ Indian market car sales</li>
+              <li>Accounts for fuel type, transmission, &amp; owners</li>
+            </ul>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <div class="feat-icon-wrap feat-teal">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M3 7V5a2 2 0 0 1 2-2h2m12 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2m-12 0H5a2 2 0 0 1-2-2v-2"/></svg>
+            </div>
+            <span class="feat-badge">Computer Vision AI</span>
+            <h3 class="feat-title">Multi-Angle Photo Inspection</h3>
+            <p class="feat-text">
+              Upload multiple photos of the exterior, interior, and odometer. Our image analysis detects paint fading, repainted panels, lighting quality, and scratches to calibrate vehicle condition.
+            </p>
+            <ul class="feat-list">
+              <li>Automatic cosmetic condition grading (1-10)</li>
+              <li>Identifies wear and surface inconsistencies</li>
+              <li>Direct visual penalty adjustment to valuation</li>
+            </ul>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <div class="feat-icon-wrap feat-yellow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <span class="feat-badge">Physical Verification</span>
+            <h3 class="feat-title">360° Test-Drive Checklist</h3>
+            <p class="feat-text">
+              An interactive 19-point digital checklist categorized across Mechanical, Exterior, Interior, Suspension/Tyres, and Legal paperwork for your physical inspection or test-drive.
+            </p>
+            <ul class="feat-list">
+              <li>Itemized real-world Indian repair costs</li>
+              <li>Flags critical defects like clutch slip or rust</li>
+              <li>Live refurbishment deductible sum</li>
+            </ul>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-card">
+            <div class="feat-icon-wrap feat-purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <span class="feat-badge">Financial Intelligence</span>
+            <h3 class="feat-title">Order Details &amp; Deal Sheet</h3>
+            <p class="feat-text">
+              Transparent accounting that uncovers the true out-of-pocket acquisition cost. Compares asking price with market valuation, plus estimated RTO paperwork and 1-year comprehensive insurance.
+            </p>
+            <ul class="feat-list">
+              <li>True Total On-Road Acquisition calculation</li>
+              <li>Itemized repair &amp; servicing deductions</li>
+              <li>Zero hidden surprises post-purchase</li>
+            </ul>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="feature-card">
+            <div class="feat-icon-wrap feat-orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2"/><rect x="3" y="4" width="18" height="12" rx="2"/><circle cx="12" cy="10" r="2"/></svg>
+            </div>
+            <span class="feat-badge">Negotiation Playbook</span>
+            <h3 class="feat-title">Counter-Offers &amp; Talking Points</h3>
+            <p class="feat-text">
+              Gives you psychological and numerical leverage. Calculates the mathematically optimal counter-offer and sets a hard walk-away ceiling price so you never overpay.
+            </p>
+            <ul class="feat-list">
+              <li>Recommended Counter-Offer value</li>
+              <li>Maximum Walk-Away Price limit</li>
+              <li>Tailored negotiation scripts for sellers</li>
+            </ul>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="feature-card">
+            <div class="feat-icon-wrap feat-green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <span class="feat-badge">Long-Term Economics</span>
+            <h3 class="feat-title">3-Year Ownership Cost (TCO)</h3>
+            <p class="feat-text">
+              Look beyond purchase price. Predicts 3-year running costs including estimated fuel expenses, scheduled maintenance, insurance renewals, and projected vehicle resale equity.
+            </p>
+            <ul class="feat-list">
+              <li>Annualized fuel consumption estimates</li>
+              <li>Scheduled service and maintenance fees</li>
+              <li>Depreciation forecast &amp; retained equity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. HOW IT WORKS (STEP-BY-STEP WORKFLOW) -->
+      <div class="home-section bg-alt-tint">
+        <div class="section-heading text-center">
+          <span class="subheading-tag">Intuitive Workflow</span>
+          <h2 class="section-headline">How It Works: 4 Simple Steps</h2>
+          <p class="section-description">
+            From entering vehicle details to sitting across from the seller with a bulletproof deal sheet.
+          </p>
+        </div>
+
+        <div class="steps-flow-grid">
+          <div class="step-card">
+            <div class="step-badge-num">1</div>
+            <h4 class="step-title">Specify Vehicle</h4>
+            <p class="step-desc">Pick brand, model, registration year, odometer kilometres, transmission, fuel variant, and seller's asking price.</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-badge-num">2</div>
+            <h4 class="step-title">Scan &amp; Inspect</h4>
+            <p class="step-desc">Upload car photos for automated CV condition grading and tick inspection flags from your physical test-drive.</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-badge-num">3</div>
+            <h4 class="step-title">Deep Learning AI</h4>
+            <p class="step-desc">Neural network computes exact valuation, confidence intervals, 4 evaluation pillars, and an overall Buy Index score.</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-badge-num">4</div>
+            <h4 class="step-title">Deal Sheet &amp; Negotiate</h4>
+            <p class="step-desc">Export the itemized deal sheet, quote the calculated counter-offer, and use tactical negotiation scripts to buy safely.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. CAR MARKET SHOWCASE (VISUAL GALLERY WITH REAL IMAGES) -->
+      <div class="home-section">
+        <div class="section-heading text-center">
+          <span class="subheading-tag">Vehicle Category Intelligence</span>
+          <h2 class="section-headline">Calibrated For India's Most Popular Cars</h2>
+          <p class="section-description">
+            Explore dedicated valuation and inspection profiles calibrated for every major body style and manufacturer.
+          </p>
+        </div>
+
+        <div class="showcase-gallery-grid">
+          <!-- Card 1: SUVs -->
+          <div class="showcase-card">
+            <div class="showcase-media">
+              <img src="/static/images/hero-car.jpg" alt="Compact &amp; Midsize SUVs" loading="lazy">
+              <span class="showcase-tag">SUV &amp; Crossover</span>
+            </div>
+            <div class="showcase-body">
+              <h3 class="showcase-title">SUVs &amp; Crossovers</h3>
+              <p class="showcase-models">Hyundai Creta · Tata Nexon · Maruti Brezza · Mahindra Scorpio-N · Kia Seltos</p>
+              <p class="showcase-desc">High demand segment with superior resale value retention and robust ground clearance. Evaluates diesel vs turbo petrol premiums.</p>
+              <button type="button" class="btn-quiet showcase-btn" data-action="quick-car" data-brand="Hyundai" data-model="Creta">Evaluate An SUV →</button>
+            </div>
+          </div>
+
+          <!-- Card 2: Sedans -->
+          <div class="showcase-card">
+            <div class="showcase-media">
+              <img src="/static/images/sedan-showcase.jpg" alt="Executive &amp; Family Sedans" loading="lazy">
+              <span class="showcase-tag">Executive Sedans</span>
+            </div>
+            <div class="showcase-body">
+              <h3 class="showcase-title">Executive &amp; Compact Sedans</h3>
+              <p class="showcase-models">Honda City · Hyundai Verna · Volkswagen Virtus · Skoda Slavia · Maruti Dzire</p>
+              <p class="showcase-desc">Unmatched highway ride stability and boot capacity. Our AI quantifies age-based depreciation and gearbox servicing factors.</p>
+              <button type="button" class="btn-quiet showcase-btn" data-action="quick-car" data-brand="Honda" data-model="City">Evaluate A Sedan →</button>
+            </div>
+          </div>
+
+          <!-- Card 3: Hatchbacks -->
+          <div class="showcase-card">
+            <div class="showcase-media">
+              <img src="/static/images/hatchback-showcase.jpg" alt="Urban Hatchbacks" loading="lazy">
+              <span class="showcase-tag">Urban Hatchbacks</span>
+            </div>
+            <div class="showcase-body">
+              <h3 class="showcase-title">Urban Hatchbacks &amp; City Cars</h3>
+              <p class="showcase-models">Maruti Swift · Maruti Baleno · Hyundai i20 · Tata Altroz · Tata Tiago</p>
+              <p class="showcase-desc">High fuel economy, budget-friendly routine servicing, and immediate liquidity. Calibrated for high-mileage odometer wear.</p>
+              <button type="button" class="btn-quiet showcase-btn" data-action="quick-car" data-brand="Maruti Suzuki" data-model="Swift">Evaluate A Hatchback →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. AI DIAGNOSTIC LAB SHOWCASE BANNER -->
+      <div class="home-section">
+        <div class="diag-banner-card">
+          <div class="diag-banner-media">
+            <img src="/static/images/ai-inspection.jpg" alt="AI Diagnostic Inspection Studio" loading="lazy">
+          </div>
+          <div class="diag-banner-content">
+            <span class="subheading-tag">Scientific Rigor</span>
+            <h3 class="diag-title">Backed by Rigorous Machine Learning &amp; Deep Neural Architecture</h3>
+            <p class="diag-text">
+              Our model was trained with Adam optimization and early stopping across 15,000 empirical used car transactions in India, outperforming standard Random Forest and Linear Regression benchmarks with an <strong>R² score of 0.9784</strong> and mean absolute error of just <strong>₹0.46 Lakh</strong>.
+            </p>
+            <div class="diag-chips">
+              <span class="diag-chip">Dense ReLU Layers</span>
+              <span class="diag-chip">Monte Carlo Dropout</span>
+              <span class="diag-chip">Categorical Embeddings</span>
+              <span class="diag-chip">R² = 0.9784 Benchmark</span>
+            </div>
+            <div class="diag-action">
+              <button type="button" class="btn-secondary" data-action="go-insights">View Model Insights &amp; Training Curves →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. FINAL CALL TO ACTION BANNER -->
+      <div class="home-section">
+        <div class="landing-cta-banner">
+          <div class="cta-inner">
+            <h2 class="cta-title">Ready To Evaluate Your Next Used Car?</h2>
+            <p class="cta-sub">
+              Get an accurate deep learning valuation, complete visual inspection, and itemized negotiation deal sheet in under 60 seconds.
+            </p>
+            <button type="button" class="btn-primary cta-btn-huge" data-action="go-estimate">
+              <span>Launch AI Valuation &amp; Inspection Now</span>
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M4.167 10h11.666m-4.166-4.167L15.833 10l-4.166 4.167" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============================== ESTIMATE & INSPECTION ============================== -->
-    <section class="view" id="tab-estimate" role="tabpanel" aria-labelledby="t-estimate">
+    <section class="view" id="tab-estimate" role="tabpanel" aria-labelledby="t-estimate" hidden>
       <div class="estimate-grid">
 
         <!-- Form Sidebar -->
